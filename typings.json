@@ -1,0 +1,23 @@
+{
+  "globalDependencies": {
+    "antd": "registry:dt/antd#0.12.10+20160326114918",
+    "babel-core": "registry:dt/babel-core#6.7.0+20160423062108",
+    "classnames": "registry:dt/classnames#0.0.0+20160316155526",
+    "html-webpack-plugin": "registry:dt/html-webpack-plugin#2.22.2+20160802151720",
+    "less": "registry:dt/less#0.0.0+20160608105036",
+    "react": "registry:dt/react#0.14.0+20160927082313",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
+    "react-fontawesome": "registry:dt/react-fontawesome#1.1.0+20160829152611",
+    "react-redux": "registry:dt/react-redux#4.4.0+20160908183346",
+    "react-router": "registry:dt/react-router#2.0.0+20160928130202",
+    "react-router-redux": "registry:dt/react-router-redux#4.0.0+20160930121107",
+    "redux": "registry:dt/redux#3.5.2+20160703092728",
+    "redux-actions": "registry:dt/redux-actions#0.8.0+20160521154116",
+    "redux-promise": "registry:dt/redux-promise#0.5.3+20160914125120",
+    "superagent": "registry:dt/superagent#2.0.0+20160906143408",
+    "webpack": "registry:dt/webpack#1.12.9+20160927034556"
+  },
+  "globalDevDependencies": {
+    "webpack-dev-server": "registry:dt/webpack-dev-server#1.12.1+20160909133903"
+  }
+}

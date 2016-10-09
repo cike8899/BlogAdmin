@@ -1,0 +1,152 @@
+.iconColor() {
+    color: rgb(79, 192, 141);
+}
+
+.main-wrap {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    // flex-direction: column;
+    .main-con {
+        width: 200px;
+        height: 200px;
+        // background: rgb(155, 188, 199);
+        border: 1px solid rgb(128, 128, 128);
+        height: 100%;
+    }
+    .side-bar-wrap {
+        width: 55px;
+        background: rgba(205, 205, 205, 0.47);
+        position: relative;
+        .iconColor;
+        .icon-container {
+            // padding: 18px 0;
+            text-align: center;
+            font-size: 18px;
+            width: 35px;
+            height: 35px;
+            margin: 18px auto;
+            border-radius: 50%;
+            border: 1px solid;
+            background: rgb(255, 255, 255);
+            > span {
+                line-height: 35px;
+            }
+            .article-icon-globe {
+                font-size: 26px;
+            }
+            .article-icon-sign-out {
+                // transform: rotate(180deg);
+            }
+        }
+        .icon-container.icon-sign-out-container {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) rotate(180deg);
+        }
+        .icon-container.active {
+            background: rgb(232, 237, 180);
+        }
+    }
+    .article-pane {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        .article-list-wrap {
+            width: 170px;
+            border-left: 0;
+            .edit-article-title {
+                padding: 10px 0;
+                border-bottom: 1px solid rgb(128, 128, 128);
+                .edit-article-title-inner-left {
+                    margin-left: 15px;
+                }
+                .edit-article-title-inner-right {
+                    float: right;
+                    margin-right: 12px;
+                }
+            }
+            .new-article-item {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                > li {
+                    padding: 12px 15px;
+                    .article-sinpper-title {
+                        color: rgb(0, 128, 0);
+                        margin-bottom: 2px;
+                    }
+                    .edit-article-time {
+                        font-size: 11px;
+                    }
+                }
+                > li:after {
+                    content: "";
+                    // background: -webkit-linear-gradient(315deg, transparent, transparent 45%, red, transparent 55%, transparent 100%), -webkit-linear-gradient(45deg, transparent, transparent 45%, red, transparent 55%, transparent 100%);
+                    // background-size: 20px 20px;
+                    // background-repeat: no-repeat;
+                    display: block;
+                    content: "";
+                    width: 100%;
+                    border: 0.05px solid rgb(128, 128, 128);
+                    transform: translateY(10px);
+                }
+            }
+        }
+        .article-edit-wrap {
+            flex: 1;
+            border-left-color: rgba(0, 0, 0, 0);
+            .inlineBlock() {
+                display: inline-block;
+            }
+            .big-title {
+                // height: 16.54px;
+                padding: 10px;
+                border-bottom: 1px solid rgb(128, 128, 128);
+            }
+            .deputy-wrap {
+                display: flex;
+                align-items: center;
+                padding: 15px 10px;
+                border-bottom: 1px solid rgb(128, 128, 128);
+                .tag-collection {
+                    // .inlineBlock;
+                }
+                .operate-article-pane {
+                    // .inlineBlock;
+                    flex: 1;
+                    .operate-article-div {
+                        display: flex;
+                        align-items: center;
+                        padding-left: 8px;
+                        // list-style: none;
+                        // padding: 0;
+                        // >li {
+                        //     display: inline-block;
+                        // }
+                        .symbol-pan {
+                            .iconColor;
+                            font-size: 8px;
+                            .add-tag {}
+                            .del-tag {
+                                margin-top: 3px;
+                            }
+                        }
+                        .btn-pan {
+                            flex: 1;
+                            display: flex;
+                            justify-content: flex-end;
+                            .del-draft {
+                                margin-right: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+            .editor {
+                height: 150px;
+            }
+        }
+    }
+}
