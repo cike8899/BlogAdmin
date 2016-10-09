@@ -1,11 +1,3 @@
-
-# 59store大前端
-
-- 面向用户： 学生消费者
-
-
-
-
 ## 目录结构
 
 ```src/```里含有一个TodoMVC的示例代码，```npm start```后在[http://localhost:5656/](http://localhost:5656/)可查看Demo    
@@ -25,7 +17,7 @@ src/
 └── store/
 ```
 
-## 涉及技术栈 (RRRW)
+## 涉及技术栈
 
 - [x] [React](https://facebook.github.io/react/)
 
