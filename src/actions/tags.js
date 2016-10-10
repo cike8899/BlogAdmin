@@ -1,6 +1,7 @@
 import {createAction} from 'redux-actions'
-import promiseMiddleware from 'redux-promise';
 
-export const addTag = createAction("add tag")
+import {postTag, getAllTags as getTags} from '../services/tagApi';
+
+export const addTag = createAction("add tag", postTag)
 export const editTag = createAction("edit tag")
-export const getAllTags = createAction("get all tags");
+export const getAllTags = createAction("get all tags", getTags);

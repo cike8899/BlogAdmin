@@ -17,9 +17,11 @@ export function post(url, formData) {
 }
 
 export function getAll(url) {
-    request('GET', url).then((data) => {
+    return request('GET', url).then((data) => {
         console.info(data.body);
+        return data.body;
     }, (err) => {
         console.info(err);
+        return err;
     })
 }

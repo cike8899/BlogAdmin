@@ -11,18 +11,6 @@ const initialState = [
 
 export default handleActions({
     'add tag' (state, action) {
-        postTag({name: action.payload, age: 67}).then((data) => {
-            return [
-                {
-                    id: state.reduce((maxId, tag) => Math.max(tag.id, maxId), -1) + 1,
-                    completed: false,
-                    text: action.payload
-                },
-                ...state
-            ];
-        }, (err) => {
-            console.info(err);
-        });
         return [
             {
                 id: state.reduce((maxId, tag) => Math.max(tag.id, maxId), -1) + 1,
@@ -34,6 +22,6 @@ export default handleActions({
     },
     'edit tag' (state, action) {},
     'get all tags' (state, action) {
-        getAllTags();
+        return action.payload; //action.payload  是后台返回的数据
     }
 }, initialState)

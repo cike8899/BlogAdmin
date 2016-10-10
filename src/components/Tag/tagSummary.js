@@ -94,10 +94,14 @@ class TagSummary extends Component {
     }
 
     handleBtnClick() {
+        let obj = {
+            name: this.state.tagVal,
+            age: Math.round(Math.random() * 100)
+        };
         let val = this
             .props
             .actions
-            .addTag(this.state.tagVal);
+            .addTag(obj);
     }
 
     handleAllTags() {
@@ -109,6 +113,10 @@ class TagSummary extends Component {
 
     handleTagInputChange(e) {
         this.setState({tagVal: e.target.value});
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.tags !== this.props.tags;
     }
 
     componentWillUpdate(nextProps, nextState) {

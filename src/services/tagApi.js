@@ -15,5 +15,5 @@ export function postTag(formData) {
 }
 
 export function getAllTags() {
-    getAll(url);
+    return getAll(url);
 }
