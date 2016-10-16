@@ -7,9 +7,10 @@
   "plugins": [
     "transform-runtime",
     [
-      "antd",
+      "import",
       {
-        "style": "css"
+        "libraryName": "antd",
+        "style": true
       }
     ]
   ]

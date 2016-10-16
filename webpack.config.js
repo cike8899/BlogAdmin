@@ -37,11 +37,11 @@ module.exports = {
       }, {
         test: /\.less$/,
         include: path.resolve(__dirname, './node_modules'),
-        loader: 'style-loader!css-loader!postcss-loader!less-loader'
+        loader: 'style-loader!css-loader?modules=false!postcss-loader!less-loader'
       }, {
         test: /\.css$/,
         include: path.resolve(__dirname, './node_modules'),
-        loader: 'style-loader!css-loader!postcss-loader'
+        loader: 'style-loader!css-loader?modules=false!postcss-loader'
       }, {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
