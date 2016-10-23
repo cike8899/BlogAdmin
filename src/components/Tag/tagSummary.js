@@ -66,7 +66,7 @@ class TagSummary extends Component {
                 render: (text, record) => {
                     console.info(that, this);
                     console.info("text:", text);
-                    return (< TagOperation {...this.props} record={record} pagination={this.colnePagination} />)
+                    return (< TagOperation {...this.props} record={record} pagination={this.pagination} />)
                 }
             }, {
                 title: '排序',
@@ -155,17 +155,28 @@ class TagSummary extends Component {
 
     modifyPaginationAfterAddTag(nextProps) {
         let total = nextProps.tags[0].count;
+        let oprationType = nextProps.tags[0].operationType;
+        let preRows = this.props.tags[0].rows;
         let remainder = total % 5;
         let cur;
-        if (remainder !== 0) {
-            cur = Math.floor(total / 5) + 1;
-        } else {
-            cur = Math.floor(total / 5);
+        if (oprationType === "add") {
+            if (remainder !== 0) {
+                cur = Math.floor(total / 5) + 1;
+            } else {
+                cur = Math.floor(total / 5);
+            }
+        } else if (oprationType === "del") {
+            if (preRows.length === 1) {
+                cur = this.pagination.current - 1;
+            } else {
+                cur = this.pagination.current;
+            }
         }
-        if (this.isAddAction) {
-            this.pagination.current = cur;
-            this.pagination.total = total;
-        }
+
+        // if (this.isAddAction) {
+        this.pagination.current = cur;
+        this.pagination.total = total;
+        // }
     }
 
     handleBtnClick() {
@@ -195,8 +206,10 @@ class TagSummary extends Component {
     componentWillReceiveProps(nextProps) {
         if (!this.pagination) {
             this.pagination = this.buildPagination(nextProps);
+            this.pagination.current = 1;
         }
-        if (nextProps.tags[0].operationType && nextProps.tags[0].operationType === "add") {
+        let operationType = nextProps.tags[0].operationType;
+        if (operationType && (operationType === "add" || operationType === "del")) {
             this.modifyPaginationAfterAddTag(nextProps);
         }
 

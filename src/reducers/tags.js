@@ -63,6 +63,16 @@ export default handleActions({
         return [{ rows: rows, count: action.payload.count, operationType: "getTagsByPage" }];
     },
     'del tag by id'(state, action) {
-
+        let rows = action.payload.rows.map(x => {
+            return {
+                id: x.id,
+                name: x.name,
+                createdAt: x.createdAt,
+                updatedAt: x.updatedAt,
+                noteCount: x.notes.length
+            }
+        });
+        // return action.payload; //action.payload  是后台返回的数据
+        return [{ rows: rows, count: action.payload.count, operationType: "del" }];
     },
 }, initialState)

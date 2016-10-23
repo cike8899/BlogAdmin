@@ -7,15 +7,21 @@ class TagOperation extends Component {
         super(props, context);
         this.record = this.props.record;
         this.actions = this.props.actions;
+        this.tags = this.props.tags[0];
         this.pagination = this.props.pagination;
     }
 
     handleDelClick(e) {
         e.preventDefault();
         e.stopPropagation();
-        let id = e.currentTarget.getAttrbute("data-id");
-        let data = { id: Number(id), current: 3, currentCount: 4, countPerPage: 5 };
-        this.actions.delTagById();
+        let id = e.currentTarget.getAttribute("data-id");
+        let data = {
+            id: Number(id),
+            current: this.props.pagination.current,
+            currentCount: this.props.tags[0].rows ? this.props.tags[0].rows.length : 0,
+            countPerPage: this.props.pagination.pageSize
+        };
+        this.props.actions.delTagById(data);
         console.info(e);
     }
 
@@ -24,7 +30,7 @@ class TagOperation extends Component {
             <div className="tag-operation-wrap">
                 <a>编辑</a>
                 |
-                <a onClick={(e) => { this.handleDelClick(e) } } data-id={this.record.id}>删除</a>
+                <a onClick={(e) => { this.handleDelClick(e) } } data-id={this.props.record.id}>删除</a>
                 <br />
                 <a>显示</a>
                 |

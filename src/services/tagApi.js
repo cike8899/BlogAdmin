@@ -28,5 +28,5 @@ export function getTagsByPage(data) {
 
 export function delTagById(data) {
     let uri = url + "/deltagbyid/" + data.id;
-    return post(url, data);
+    return post(uri, data);
 }
