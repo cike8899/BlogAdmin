@@ -28,12 +28,12 @@ module.exports = {
         test: /\.less$/,
         exclude: path.resolve(__dirname, './node_modules'),
         loader: 'style-loader!css-loader?modules&camelCase&importLoaders=1&localIdentName=[local]' +
-            '__[hash:base64:6]!postcss-loader!less-loader'
+        '__[hash:base64:6]!postcss-loader!less-loader'
       }, {
         test: /\.css$/,
         exclude: path.resolve(__dirname, './node_modules'),
         loader: 'style-loader!css-loader?modules&camelCase&importLoaders=1&localIdentName=[local]' +
-            '__[hash:base64:6]!postcss-loader'
+        '__[hash:base64:6]!postcss-loader'
       }, {
         test: /\.less$/,
         include: path.resolve(__dirname, './node_modules'),
@@ -66,9 +66,9 @@ module.exports = {
   },
   postcss: [autoprefixer({
 
-      browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie > 8']
+    browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie > 8']
 
-    })],
+  })],
   plugins: [
     new DashboardPlugin(),
     new webpack
@@ -79,8 +79,11 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
       }
     }),
-    new HtmlWebpackPlugin({template: './index.html'}),
-    new OpenBrowserPlugin({url: "http://localhost:5656"})
+    new HtmlWebpackPlugin({ template: './index.html' }),
+    new OpenBrowserPlugin({ url: "http://localhost:5656" }),
+    new webpack.ProvidePlugin({
+      "_": "lodash"
+    })
   ],
   devServer: {
     stats: {

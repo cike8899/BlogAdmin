@@ -5,6 +5,7 @@
     "classnames": "registry:dt/classnames#0.0.0+20160316155526",
     "html-webpack-plugin": "registry:dt/html-webpack-plugin#2.22.2+20160802151720",
     "less": "registry:dt/less#0.0.0+20160608105036",
+    "lodash": "registry:dt/lodash#4.14.0+20161004174455",
     "react": "registry:dt/react#0.14.0+20160927082313",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
     "react-fontawesome": "registry:dt/react-fontawesome#1.1.0+20160829152611",

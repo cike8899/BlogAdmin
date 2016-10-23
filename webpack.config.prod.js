@@ -28,12 +28,12 @@ module.exports = {
         test: /\.less$/,
         exclude: path.resolve(__dirname, './node_modules'),
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&minimize&camelCase&importLoaders=1&localIdentName=[local]__[h' +
-            'ash:base64:6]!postcss-loader!less-loader')
+          'ash:base64:6]!postcss-loader!less-loader')
       }, {
         test: /\.css$/,
         exclude: path.resolve(__dirname, './node_modules'),
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&minimize&camelCase&importLoaders=1&localIdentName=[local]__[h' +
-            'ash:base64:6]!postcss-loader')
+          'ash:base64:6]!postcss-loader')
       }, {
         test: /\.less$/,
         include: path.resolve(__dirname, './node_modules'),
@@ -63,9 +63,9 @@ module.exports = {
   },
   postcss: [autoprefixer({
 
-      browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie > 8']
+    browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie > 8']
 
-    })],
+  })],
   plugins: [
     new webpack
       .optimize
@@ -91,6 +91,7 @@ module.exports = {
           warnings: false
         }
       }),
-    new HtmlWebpackPlugin({minify: {}, template: './index.html'})
+    new HtmlWebpackPlugin({ minify: {}, template: './index.html' }),
+    new webpack.ProvidePlugin({ "_": "lodash" })
   ]
 }

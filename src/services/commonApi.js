@@ -3,7 +3,7 @@ import request from 'superagent';
 export function post(url, formData) {
     return new Promise((resolve, reject) => {
         request.post(url)
-        // .withCredentials()
+            // .withCredentials()
             .send(formData)
             .set('Accept', 'application/json')
             .end(function (err, res) {
@@ -24,4 +24,18 @@ export function getAll(url) {
         console.info(err);
         return err;
     })
+}
+
+export function getDataByPage() {
+
+}
+
+export function get(url) {
+    return new Promise((resolve, reject) => {
+        request.get("GET", url).then((data) => {
+            resolve(data.body);
+        }, (err) => {
+            reject(err);
+        });
+    });
 }

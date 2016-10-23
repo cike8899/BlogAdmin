@@ -31,7 +31,7 @@ src/
 - [x] [CSS modules](https://github.com/outpunk/postcss-modules)
 - [x] TodoMVC 示例
 
-## 安装(如果还需要的话)
+## 安装
 
 ```
 $ npm install
@@ -48,3 +48,11 @@ $ npm start
 ```
 $ npm run build
 ```
+
+## isuess
+
+1. antd 文件加载组件的时候样式通过css-loader的module模式加了后缀导致
+样式classname和标签中的classname不匹配，所以显示不了，现在的解决方案是：
+在index.html引入全局样式。
+
+2. 
