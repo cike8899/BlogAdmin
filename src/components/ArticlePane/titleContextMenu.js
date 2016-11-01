@@ -21,7 +21,7 @@ class TitleContextMenu extends Component {
         return (
             <ContextMenu identifier="some_unique_identifier" currentItem={this.currentItem}>
                 <MenuItem data={{ o: "o" }} onClick={this.handleClick}>
-                    ContextMenu Item 1
+                    删除文章
                 </MenuItem>
                 <MenuItem data={{ p: "p" }} onClick={this.handleClick1}>
                     ContextMenu Item 2

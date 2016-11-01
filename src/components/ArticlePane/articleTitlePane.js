@@ -4,20 +4,31 @@ import FontAwesome from 'react-fontawesome';
 import ArticleTitleItem from './articleTitleItem';
 import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
 import TitleContextMenu from './titleContextMenu';
+import TitleMenuPane from './titleMenuPane';
+import menuStyle from './titleMenuPane.less';
 
-const Layer = ContextMenuLayer("some_unique_identifier")(ArticleTitleItem);
+// const Layer = ContextMenuLayer("some_unique_identifier")(ArticleTitleItem);
 
 class ArticleTitlePane extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            articleTitleItems: []
+            articleTitleItems: [],
+            menuPaneClass: `${menuStyle["title-menu-pane-hidden"]} ${menuStyle["title-menu-pane"]}`
         }
     }
 
     handlePlusClick(e) {
         this.state.articleTitleItems.push(1);
         this.setState({ articleTitleItems: this.state.articleTitleItems });
+    }
+
+    handleContextMenu(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.info("popup");
+        var sty = menuStyle["title-menu-pane"];
+        this.setState({ menuPaneClass: menuStyle["title-menu-pane"] });
     }
 
     render() {
@@ -32,16 +43,14 @@ class ArticleTitlePane extends Component {
                         <FontAwesome name="plus" className={style["plus-icon"]} onClick={(e) => { this.handlePlusClick(e) } } />
                     </span>
                 </div>
-                <div>
+                <div onContextMenu={(e) => { this.handleContextMenu(e) } }>
                     {this.state.articleTitleItems.map((x, idx) => {
                         return (
-                            <Layer key={`l-${idx}`}>
-                                
-                            </Layer>
+                            <ArticleTitleItem key={idx} />
                         );
                     })}
-                    <TitleContextMenu />
                 </div>
+                <TitleMenuPane className={this.state.menuPaneClass} />
             </div>
         );
     }

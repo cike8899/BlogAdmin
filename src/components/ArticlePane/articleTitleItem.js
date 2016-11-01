@@ -10,7 +10,6 @@ class ArticleTitleItem extends Component {
 
     }
 
-
     handleContextMenu(e) {
         e.preventDefault();
         e.stopPropagation();

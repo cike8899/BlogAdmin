@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 // import Header from '../../components/Header' import MainSection from
 // '../../components/MainSection' import * as TodoActions from
 // '../../actions/todos' import style from './style.less' import style from
@@ -16,7 +16,8 @@ class Backend extends Component {
             <div style={{
                 height: '100%'
             }}>
-                <ArticleControl actions={actions} tags={tags}/> {children}
+                <ArticleControl actions={actions} tags={tags} />
+                {children}
             </div>
         )
     }
@@ -30,7 +31,7 @@ Backend.propTypes = {
 
 function mapStateToProps(state) {
     // return {todos: state.todos}
-    return {tags: state.tags};
+    return { tags: state.tags };
 }
 
 function mapDispatchToProps(dispatch) {
