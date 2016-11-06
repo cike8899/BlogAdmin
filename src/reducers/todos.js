@@ -8,7 +8,7 @@ const initialState = [{
 }]
 
 export default handleActions({
-  'add todo' (state, action) {
+  'add todo'(state, action) {
     return [{
       id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
       completed: false,
@@ -16,37 +16,37 @@ export default handleActions({
     }, ...state]
   },
 
-  'delete todo' (state, action) {
-    return state.filter(todo => todo.id !== action.payload )
+  'delete todo'(state, action) {
+    return state.filter(todo => todo.id !== action.payload)
   },
 
-  'edit todo' (state, action) {
+  'edit todo'(state, action) {
     return state.map(todo => {
       return todo.id === action.payload.id
         ? { ...todo, text: action.payload.text }
         : todo
-    })
+})
   },
 
-  'complete todo' (state, action) {
-    return state.map(todo => {
-      return todo.id === action.payload
-        ? { ...todo, completed: !todo.completed }
+'complete todo'(state, action) {
+  return state.map(todo => {
+    return todo.id === action.payload
+      ? { ...todo, completed: !todo.completed }
         : todo
     })
   },
 
-  'complete all' (state) {
-    const areAllMarked = state.every(todo => todo.completed)
-    return state.map(todo => {
-      return {
+'complete all'(state) {
+  const areAllMarked = state.every(todo => todo.completed)
+  return state.map(todo => {
+    return {
         ...todo,
-        completed: !areAllMarked
+    completed: !areAllMarked
       }
     })
   },
 
-  'clear complete' (state) {
-    return state.filter(todo => todo.completed === false)
-  }
+'clear complete'(state) {
+  return state.filter(todo => todo.completed === false)
+}
 }, initialState)

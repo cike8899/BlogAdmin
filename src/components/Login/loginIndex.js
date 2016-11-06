@@ -17,7 +17,7 @@ class LoginIndex extends Component {
     }
 
     handleOkBtn(e) {
-
+        console.info(e);
     }
 
     handleCancleBtn(e) {

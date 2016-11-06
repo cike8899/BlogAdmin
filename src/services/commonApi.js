@@ -1,4 +1,5 @@
 import request from 'superagent';
+import cookie from 'js-cookie';
 
 export function post(url, formData) {
     return new Promise((resolve, reject) => {
@@ -6,6 +7,7 @@ export function post(url, formData) {
             // .withCredentials()
             .send(formData)
             .set('Accept', 'application/json')
+            .set('Authorization', '')
             .end(function (err, res) {
                 console.info("res:", res.body);
                 console.info("err:", err);

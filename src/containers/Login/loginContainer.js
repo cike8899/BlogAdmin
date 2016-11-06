@@ -10,10 +10,10 @@ class LoginContainer extends Component {
     }
 
     render() {
-        const {login, children} = this.props;
+        const {users, children} = this.props;
         return (
             <div>
-                <LoginIndex login={login} />
+                <LoginIndex users={users} />
                 {children}
             </div>
         );
@@ -27,7 +27,7 @@ LoginContainer.PropTypes = {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        login: state.login
+        users: state.users
     }
 }
 
