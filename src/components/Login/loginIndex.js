@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Modal, Button, Input } from 'antd';
 import style from './login.less';
 
@@ -17,6 +17,12 @@ class LoginIndex extends Component {
     }
 
     handleOkBtn(e) {
+        // let name = this.refs.userName.value;
+        // let pwd = this.refs.pwd.value;
+        let name = this.state.username;
+        let pwd = this.state.pwd;
+        let ret = this.props.userActions.login({ name: name, pwd: pwd });
+        console.info("login:", ret);
         console.info(e);
     }
 
@@ -52,12 +58,12 @@ class LoginIndex extends Component {
                         <li>
                             <span className={style["username-label"]}>用户名</span>
                             <Input placeholder={"请输入用户名..."} className={style["username-textbox"]}
-                                onChange={(e) => { this.handleUsernameChange(e) } } />
+                                ref="userName" onChange={(e) => { this.handleUsernameChange(e) } } />
                         </li>
                         <li>
                             <span className={style["pwd-label"]}>密码</span>
                             <Input placeholder={"请输入密码..."} className={style["pwd-textbox"]}
-                                onChange={(e) => { this.handlePwdChange(e) } }
+                                ref="pwd" onChange={(e) => { this.handlePwdChange(e) } }
                                 />
                         </li>
                     </ul>
@@ -65,6 +71,11 @@ class LoginIndex extends Component {
             </div>
         );
     }
+}
+
+LoginIndex.PropTypes = {
+    userActions: PropTypes.object,
+    users: PropTypes.array
 }
 
 export default LoginIndex;

@@ -1,13 +1,14 @@
 import request from 'superagent';
-import cookie from 'js-cookie';
+import cookies from 'js-cookie';
 
 export function post(url, formData) {
+    let token = cookies.get("token");//每次数据请求加上token
     return new Promise((resolve, reject) => {
         request.post(url)
             // .withCredentials()
             .send(formData)
             .set('Accept', 'application/json')
-            .set('Authorization', '')
+            .set('Authorization', token)
             .end(function (err, res) {
                 console.info("res:", res.body);
                 console.info("err:", err);
