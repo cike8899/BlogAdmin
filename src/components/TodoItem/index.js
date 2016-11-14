@@ -25,6 +25,11 @@ class TodoItem extends Component {
     this.setState({ editing: false })
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.info("TodoItem:componentWillReceiveProps:", this.props, nextProps);
+  }
+
+
   render() {
     const {todo, completeTodo, deleteTodo} = this.props
 
@@ -32,23 +37,23 @@ class TodoItem extends Component {
     if (this.state.editing) {
       element = (
         <TodoTextInput text={todo.text}
-           editing={this.state.editing}
-           onSave={(text) => this.handleSave(todo.id, text)} />
+          editing={this.state.editing}
+          onSave={(text) => this.handleSave(todo.id, text)} />
       )
     } else {
       element = (
         <div className={style.view}>
           <input className={style.toggle}
-             type="checkbox"
-             checked={todo.completed}
-             onChange={() => completeTodo(todo.id)} />
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => completeTodo(todo.id)} />
 
           <label onDoubleClick={::this.handleDoubleClick}>
             {todo.text}
           </label>
 
-          <button className={style.destroy} onClick={() => deleteTodo(todo.id)} />
-        </div>
+        <button className={style.destroy} onClick={() => deleteTodo(todo.id)} />
+        </div >
       )
     }
 

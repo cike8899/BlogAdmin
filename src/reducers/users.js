@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions'
 import cookies from 'js-cookie';
+import { hashHistory } from 'react-router';
 
 const initialState = [{
     userName: "",
@@ -12,8 +13,9 @@ export default handleActions({
         let newState;
         if (action.payload.success === true) {
             let token = action.payload.token;
-            cookies.set('token', token, { expires: 7 });
+            // cookies.set('token', token, { expires: 7 });
             newState = [...state, { userName: action.payload.userName, token: token }];
+            // hashHistory.push("/article");
         } else {
             newState = state;
         }

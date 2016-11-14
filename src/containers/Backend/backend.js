@@ -6,17 +6,20 @@ import { connect } from 'react-redux'
 // '../../actions/todos' import style from './style.less' import style from
 // '../../../node_modules/font-awesome/css/font-awesome.min.css';
 import * as TagActions from '../../actions/tags';
+import * as CurArticleActions from '../../actions/currentArticle';
+import * as NoteActions from '../../actions/notes';
 import ArticleControl from '../../components/AtiticleControl/articleControl';
 import FontAwesome from 'react-fontawesome';
 
 class Backend extends Component {
     render() {
-        const {children, tags, actions} = this.props
+        const {children, tags, actions, currentArticle, notes} = this.props
         return (
             <div style={{
                 height: '100%'
             }}>
-                <ArticleControl actions={actions} tags={tags} />
+                <ArticleControl actions={actions} tags={tags}
+                    currentArticle={currentArticle} notes={notes} />
                 {children}
             </div>
         )
@@ -29,15 +32,19 @@ Backend.propTypes = {
     tags: PropTypes.array
 }
 
+const TargetActions = {};
+Object.assign(TargetActions, TagActions, CurArticleActions, NoteActions);
+
+
 function mapStateToProps(state) {
     // return {todos: state.todos}
-    return { tags: state.tags };
+    return { tags: state.tags, currentArticle: state.currentArticle, notes: state.notes };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         // actions: bindActionCreators(TodoActions, dispatch)
-        actions: bindActionCreators(TagActions, dispatch)
+        actions: bindActionCreators(TargetActions, dispatch)
     }
 }
 

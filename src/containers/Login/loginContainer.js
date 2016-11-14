@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import LoginIndex from '../../components/Login/loginIndex';
 import * as userActions from '../../actions/users';
+import { hashHistory } from 'react-router';
 
 class LoginContainer extends Component {
     constructor(props, context) {
@@ -14,7 +15,7 @@ class LoginContainer extends Component {
         const {users, children, userActions} = this.props;
         return (
             <div>
-                <LoginIndex users={users} userActions={userActions} />
+                <LoginIndex userActions={userActions} />
                 {children}
             </div>
         );
@@ -27,6 +28,9 @@ LoginContainer.PropTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    // if (state.users.length > 1) {
+    //     hashHistory.push("/article");
+    // }
     return {
         users: state.users
     }

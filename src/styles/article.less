@@ -56,6 +56,8 @@
         .article-list-wrap {
             width: 170px;
             border-left: 0;
+            display: flex;
+            flex-direction: column;
             .edit-article-title {
                 padding: 10px 0;
                 border-bottom: 1px solid rgb(128, 128, 128);
@@ -70,18 +72,28 @@
                     }
                 }
             }
+            .edit-article-item-wrap {
+                overflow: auto;
+                flex: 1;
+                .edit-article-item-inner {}
+            }
             .new-article-item {
                 list-style: none;
                 padding: 0;
                 margin: 0;
                 > li {
                     padding: 12px 15px;
-                    .article-sinpper-title {
-                        color: rgb(0, 128, 0);
-                        margin-bottom: 2px;
+                    .single-article-item {
+                        .article-sinpper-title {
+                            color: rgb(0, 128, 0);
+                            margin-bottom: 2px;
+                        }
+                        .edit-article-time {
+                            font-size: 11px;
+                        }
                     }
-                    .edit-article-time {
-                        font-size: 11px;
+                    .single-article-item.single-article-item-blank {
+                        height: 50px;
                     }
                 }
                 > li:after {
@@ -96,6 +108,9 @@
                     transform: translateY(10px);
                 }
             }
+            .new-article-item.new-article-item-active {
+                background: rgb(148, 228, 220);
+            }
         }
         .article-edit-wrap {
             flex: 1;
@@ -107,6 +122,13 @@
                 // height: 16.54px;
                 padding: 10px;
                 border-bottom: 1px solid rgb(128, 128, 128);
+                .article-title-input {
+                    width: 100%;
+                    height: 100%;
+                }
+                .article-title-input.article-title-input-blur {
+                    border: 0;
+                }
             }
             .deputy-wrap {
                 display: flex;

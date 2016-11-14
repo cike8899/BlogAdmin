@@ -61,6 +61,11 @@ class MainSection extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.info("MainSection:",this.props,nextProps);
+  }
+  
+
   render() {
     const {todos, actions} = this.props
     const {filter} = this.state

@@ -7,7 +7,7 @@ import { ContextMenu, MenuItem, ContextMenuLayer } from 'react-contextmenu';
 class ArticleTitleItem extends Component {
     constructor(props, context) {
         super(props, context);
-
+        this.getArticleItemStyle = this.getArticleItemStyle.bind(this);
     }
 
     handleContextMenu(e) {
@@ -16,13 +16,28 @@ class ArticleTitleItem extends Component {
         console.info("popup");
     }
 
+    handleItemClick(e) {
+        this.props.handleClick(this.props.note.id);
+    }
+
+    getArticleItemStyle() {
+        let sty;
+        if (this.props.note.title === "") {
+            sty = style["single-article-item"] + " " + style["single-article-item-blank"];
+        } else {
+            sty = style["single-article-item"];
+        }
+        return sty;
+    }
+
     render() {
+        let note = this.props.note;
         return (
-            <ul className={style["new-article-item"]}>
+            <ul className={this.props.sty} onClick={(e) => { this.handleItemClick(e) } }>
                 <li>
-                    <div className={style["single-article-item"]}>
-                        <div className={style["article-sinpper-title"]}>新博客还没完成</div>
-                        <div className={style["edit-article-time"]}>2016-10-04 22:38</div>
+                    <div className={this.getArticleItemStyle()}>
+                        <div className={style["article-sinpper-title"]}>{note.title}</div>
+                        <div className={style["edit-article-time"]}>{note.updatedAt}</div>
                     </div>
                 </li>
             </ul>
