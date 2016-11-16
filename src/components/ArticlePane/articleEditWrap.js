@@ -8,13 +8,22 @@ class ArticleEditWrap extends Component {
         super(props, context);
         this.content = "";
         this.state = {
-            isTitleFocus: false
+            isTitleFocus: false,
+            note: {
+                content: "",
+                createdAt: "",
+                id: 0,
+                tags: [],
+                title: "",
+                updatedAt: ""
+            }
         }
     }
 
 
     handleArticleTitleChange(e) {
-        console.info(e);
+        this.state.note.title = e.target.value;
+        this.setState({ note: this.state.note })
     }
 
     handleArticleTitleFocus(e) {
@@ -22,6 +31,7 @@ class ArticleEditWrap extends Component {
     }
 
     handleArticleTitleBlur(e) {
+        this.props.notesActions.updateNoteTitle(this.state.note);
         this.setState({ isTitleFocus: false });
     }
 
@@ -34,28 +44,41 @@ class ArticleEditWrap extends Component {
     }
 
     handleEditorChange(e) {
-        this.content = e;
+        this.state.note.content = e;
+        // this.setState({ note: this.state });
+    }
+
+    handleEditorBlur(e) {
+        console.info("handleEditorBlur");
     }
 
     publishArticle() {
-        let title = this.refs.articleTitle.value.trim();
-        let content = this.content;
-        this.props.actions.addOrUpdateNote({ title, content });
+        // let title = this.refs.articleTitle.value.trim();
+        // let content = this.content;
+        // this.props.notesActions.addOrUpdateNote({ title, content });
+        console.info(this.state.note);
     }
 
+    saveArticle(e) {
+        this.props.notesActions.addOrUpdateNote(this.state.note);
+    }
 
     componentWillMount() {
-        this.props.actions.getNotesByPage(1);
+        // this.props.actions.getNotesByPage(1);
     }
 
+    componentWillReceiveProps(nextProps) {
+        // console.info(nextProps.note, this.props.note);
+        this.setState({ note: nextProps.note });
+    }
 
     render() {
-        const {title, content, tags } = this.props
+        // const note = this.props.note;
         return (
             <div className={`${style["main-con"]} ${style["article-edit-wrap"]}`}>
                 <div className={style["big-title"]}>
-                    <input defaultValue={'哈哈哈' + title} className={this.getTitleInputStyle()}
-                        ref={"articleTitle"}
+                    <input className={this.getTitleInputStyle()}
+                        ref={"articleTitle"} value={this.state.note.title}
                         onChange={(e) => { this.handleArticleTitleChange(e) } }
                         onFocus={(e) => { this.handleArticleTitleFocus(e) } }
                         onBlur={(e) => { this.handleArticleTitleBlur(e) } }
@@ -77,6 +100,7 @@ class ArticleEditWrap extends Component {
                             </div>
                             <div className={style["btn-pan"]}>
                                 <button className={style["del-draft"]}>删除草稿</button>
+                                <button className={style["save-draft"]} onClick={(e) => { this.saveArticle(e) } }>保存文章</button>
                                 <button onClick={(e) => { this.publishArticle(e) } }>发布文章</button>
                             </div>
                         </div>
@@ -86,8 +110,13 @@ class ArticleEditWrap extends Component {
                     <Editor
                         options={{
                             status: false,
-                            value: content
-                        }} onChange={(e) => { this.handleEditorChange(e) } } />
+                            autofocus: true,
+                            spellChecker: true
+                        }}
+                        value={this.state.note.content}
+                        onChange={(e) => { this.handleEditorChange(e) } }
+                        onBlur={(e) => { this.handleEditorBlur(e) } }
+                        />
                 </div>
             </div>
         );

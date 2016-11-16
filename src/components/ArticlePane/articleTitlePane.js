@@ -37,7 +37,7 @@ class ArticleTitlePane extends Component {
 
     handleItemClick(idx) {
         this.setState({ "currentIdx": idx });
-        console.info(idx, this);
+        this.props.actions.updateSelectedNote(idx);
     }
 
     handleItemStyle(idx) {
@@ -46,6 +46,14 @@ class ArticleTitlePane extends Component {
         } else {
             return style["new-article-item"];
         }
+    }
+
+    judgeItemIsSeletced(idx) {
+        let isSelected = false;
+        if (this.state.currentIdx === idx) {
+            isSelected = true;
+        }
+        return isSelected;
     }
 
     handleItemWrapScroll(e) {
@@ -77,6 +85,15 @@ class ArticleTitlePane extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        let currentRows = nextProps.notes.rows;
+        let selectedNote = nextProps.notes.selectedNote;
+        if (currentRows.length > 0 && currentRows.length <= 20) {//表明是第一次加载,添加第一项的背景色
+            if (selectedNote.id === null) {//第一次加载，还没有选中操作
+                this.setState({ currentIdx: currentRows[0].id });
+            } else {
+                this.setState({ currentIdx: selectedNote.id });
+            }
+        }
         if (nextProps.notes.rows.length > this.props.notes.rows.length) {
             this.isFetchSucceed = true;
         }
@@ -92,9 +109,14 @@ class ArticleTitlePane extends Component {
         console.info("nextProps:", nextProps);
     }
 
+
+    componentWillMount() {
+        this.props.actions.getNotesByPage(1);
+    }
+
+
     render() {
         let rows = this.props.notes.rows;
-        console.info("ArticleTitlePane:render", this.props.notes);
         return (
             <div className={`${style["main-con"]} ${style["article-list-wrap"]}`}>
                 <div className={style["edit-article-title"]}>
@@ -113,7 +135,10 @@ class ArticleTitlePane extends Component {
                         onContextMenu={(e) => { this.handleContextMenu(e) } }>
                         {rows.map((x, idx) => {
                             return (
-                                <ArticleTitleItem key={x.id} note={x} sty={this.handleItemStyle(x.id)}
+                                <ArticleTitleItem key={x.id} note={x}
+                                    isSelected={this.judgeItemIsSeletced(x.id)}
+                                    selectedNote={this.props.notes.selectedNote}
+                                    sty={this.handleItemStyle(x.id)}
                                     handleClick={this.handleItemClick} />
                             );
                         })}

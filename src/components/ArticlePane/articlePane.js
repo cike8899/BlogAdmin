@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import style from '../../styles/article.less';
 
 import ArticleTitlePane from './articleTitlePane';
-import ArticleEditWrap from './articleEditWrap';
+// import ArticleEditWrap from './articleEditWrap';
+import ArticleEditContainer from '../../containers/Backend/articleEditContainer';
 
 class ArticlePane extends Component {
 
@@ -10,8 +11,7 @@ class ArticlePane extends Component {
         return (
             <div className={style["article-pane"]}>
                 <ArticleTitlePane actions={this.props.actions} notes={this.props.notes} />
-                <ArticleEditWrap currentArticle={this.props.currentArticle}
-                    notes={this.props.notes} actions={this.props.actions} />
+                <ArticleEditContainer />
             </div>
         );
     }

@@ -30,13 +30,21 @@ class ArticleTitleItem extends Component {
         return sty;
     }
 
+    getNoteTitle() {
+        let title = this.props.note.title;
+        if (this.props.selectedNote.id === this.props.note.id) {
+            title = this.props.selectedNote.title;
+        }
+        return title;
+    }
+
     render() {
         let note = this.props.note;
         return (
             <ul className={this.props.sty} onClick={(e) => { this.handleItemClick(e) } }>
                 <li>
                     <div className={this.getArticleItemStyle()}>
-                        <div className={style["article-sinpper-title"]}>{note.title}</div>
+                        <div className={style["article-sinpper-title"]}>{this.getNoteTitle()}</div>
                         <div className={style["edit-article-time"]}>{note.updatedAt}</div>
                     </div>
                 </li>
