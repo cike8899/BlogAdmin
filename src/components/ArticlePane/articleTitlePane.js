@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { message } from 'antd';
 import style from '../../styles/article.less';
 import FontAwesome from 'react-fontawesome';
 import ArticleTitleItem from './articleTitleItem';
@@ -24,7 +25,13 @@ class ArticleTitlePane extends Component {
     handlePlusClick(e) {
         // this.state.articleTitleItems.unshift(1);
         // this.setState({ articleTitleItems: this.state.articleTitleItems });
-        let o = this.props.actions.addEmptyNote({ id: "empty", title: "", content: "", tags: "" });
+        let notes = this.props.notes.rows;
+        if (notes.length > 0 && notes.some(y => y.id === "empty")) {
+            message.warning("请先保存文章");
+        } else {
+            let promise = this.props.actions.addEmptyNote({ id: "empty", title: "", content: "", tags: [] });
+        }
+
     }
 
     handleContextMenu(e) {

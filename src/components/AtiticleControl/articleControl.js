@@ -16,7 +16,7 @@ class ArticleControl extends Component {
 
     render() {
         return (
-            <TabControl>
+            <TabControl actions={this.props.actions}>
                 <Tab name="file-text">
                     <ArticlePane actions={this.props.actions}
                         currentArticle={this.props.currentArticle}

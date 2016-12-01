@@ -15,7 +15,7 @@ class LoginContainer extends Component {
         const {users, children, userActions} = this.props;
         return (
             <div>
-                <LoginIndex userActions={userActions} />
+                <LoginIndex userActions={userActions} users={users} />
                 {children}
             </div>
         );

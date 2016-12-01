@@ -23,10 +23,13 @@ export default handleActions({
         return newState;
     },
     'logout'(state, action) {
-        let token = cookies.get("token");
-        if (token !== "" || token !== null || token !== undefined) {
-            cookies.remove("token");
+        if (action.payload.success) {
+            let token = cookies.get("token");//这个也可以直接放在userApi那边操作
+            if (token !== "" || token !== null || token !== undefined) {
+                cookies.remove("token");
+            }
+        } else {
+            console.info("退出失败！");
         }
-        console.info(action.payload);
     }
 }, initialState);

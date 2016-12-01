@@ -7,10 +7,12 @@ let url = "http://localhost:9000/api/admin/user";
 export let login = (userInfo) => {
     let uri = url + "/login";
     let promise = post(uri, userInfo).then((ret) => {
-        if (ret.success) {
+        if (ret.success === true) {
             let token = ret.token;
-            cookies.set('token', token, { expires: 7 });
+            cookies.set('token', token, { expires: 1 });
             hashHistory.push("/article");
+        } else if (ret.success === "not found") {
+            console.info("not found");
         }
         console.info(ret);
         return ret;
@@ -20,6 +22,11 @@ export let login = (userInfo) => {
 
 export let logout = (userInfo) => {
     let uri = url + "/logout";
-    return post(uri, userInfo);
+    return post(uri, userInfo).then((ret) => {
+        if (ret.success) {
+            hashHistory.push("/");
+        }
+        return ret;
+    });
 }
 

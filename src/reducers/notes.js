@@ -20,8 +20,10 @@ export default handleActions({
     },
     'add or update note'(state, action) {
         let isAdd = action.payload.isAdd;
-        if (isAdd) {
-            state.unshift(action.payload.note);
+        if (isAdd) {//删除row里面存在的empty
+            state.rows.splice(0, 1, action.payload.note);
+            // state.unshift(action.payload.note);
+            state.selectedNote = action.payload.note;
             state.count++;
         }
         else {
@@ -61,8 +63,14 @@ export default handleActions({
     },
     "add empty note"(state, action) {
         let newState = {};
-        state.rows.unshift(action.payload);
-        Object.assign(newState, state);
+        if (state.rows.length > 0 && state.rows.some(x => x.id === "empty")) {
+            newState = state;
+        } else {
+            state.rows.unshift(action.payload);
+            state.selectedNote = action.payload;
+            Object.assign(newState, state);
+        }
+
         return newState;
     },
     "update note title"(state, action) {

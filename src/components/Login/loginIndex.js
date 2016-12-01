@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Modal, Button, Input } from 'antd';
+import { Modal, Button, Input, message } from 'antd';
 import style from './login.less';
 
 class LoginIndex extends Component {
@@ -22,6 +22,16 @@ class LoginIndex extends Component {
         let name = this.state.username;
         let pwd = this.state.pwd;
         let ret = this.props.userActions.login({ name: name, pwd: pwd });
+        ret.then((ret) => {
+            let success = ret.payload.success;
+            if (success === "not found") {
+                message.error("user name is not be found!");
+            } else if (success === false) {
+                message.error("user name or password is incorrect!");
+            }
+        }, (err) => {
+            console.info(err);
+        });
         console.info("login:", ret);
         console.info(e);
     }

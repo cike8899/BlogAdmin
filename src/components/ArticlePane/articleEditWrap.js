@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { message } from 'antd';
 import FontAwesome from 'react-fontawesome';
 import Editor from 'react-simplemde-editor';
 import style from '../../styles/article.less';
+import { isContentContainExcerpt, truncateContent } from '../../utils/excerpt';
 
 class ArticleEditWrap extends Component {
     constructor(props, context) {
@@ -12,7 +14,7 @@ class ArticleEditWrap extends Component {
             note: {
                 content: "",
                 createdAt: "",
-                id: 0,
+                id: "empty",
                 tags: [],
                 title: "",
                 updatedAt: ""
@@ -60,7 +62,17 @@ class ArticleEditWrap extends Component {
     }
 
     saveArticle(e) {
-        this.props.notesActions.addOrUpdateNote(this.state.note);
+        //判断有没有摘要
+        let isContainExcerpt = isContentContainExcerpt(this.state.note.content);
+        if (isContainExcerpt) {
+            let note = Object.assign({}, this.state.note);
+            if (note.id === "empty") {
+                delete note.id;
+            }
+            this.props.notesActions.addOrUpdateNote(note);
+        } else {
+            message.warning("请输入在<!-- split -->前输入摘要");
+        }
     }
 
     componentWillMount() {
@@ -111,7 +123,8 @@ class ArticleEditWrap extends Component {
                         options={{
                             status: false,
                             autofocus: true,
-                            spellChecker: true
+                            spellChecker: true,
+                            autoDownloadFontAwesome: false
                         }}
                         value={this.state.note.content}
                         onChange={(e) => { this.handleEditorChange(e) } }

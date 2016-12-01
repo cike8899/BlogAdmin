@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import style from './style.less';
 import FontAwesome from 'react-fontawesome';
 import articleStyle from '../../styles/article.less';
@@ -9,6 +9,11 @@ class TabsControl extends Component {
         this.state = {
             currentIndex: 0
         };
+    }
+
+    handleLogout(e) {
+        console.info(e);
+        this.props.actions.logout({});
     }
 
     getTitleItemCssClasses(index) {
@@ -32,24 +37,29 @@ class TabsControl extends Component {
         return (
             <div className={articleStyle["main-wrap"]}>
                 <div className={`${articleStyle["main-con"]} ${articleStyle["side-bar-wrap"]}`}>
-                    {React
-                        .Children
-                        .map(this.props.children, (ele, idx) => {
+                    {
+                        React.Children.map(this.props.children, (ele, idx) => {
                             return (
                                 <div
                                     className={that.getTitleItemCssClasses(idx)}
                                     onClick={() => {
-                                    this.setState({currentIndex: idx})
-                                }}>
-                                    <FontAwesome name={ele.props.name}/>
+                                        this.setState({ currentIndex: idx })
+                                    } }>
+                                    <FontAwesome name={ele.props.name} />
                                 </div>
                             );
                         })}
+                    <div
+                        className={`${articleStyle["icon-container"]} ${articleStyle["icon-sign-out-container"]}`}
+                        onClick={(e) => {
+                            this.handleLogout(e);
+                        } }>
+                        <FontAwesome name={"sign-out"} />
+                    </div>
                 </div>
                 <div className={style["tab-content-wrap"]}>
-                    {React
-                        .Children
-                        .map(this.props.children, (ele, idx) => {
+                    {
+                        React.Children.map(this.props.children, (ele, idx) => {
                             return (
                                 <div className={this.getContentItemCssClasses(idx)}>
                                     {ele}

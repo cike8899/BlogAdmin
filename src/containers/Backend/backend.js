@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import * as TagActions from '../../actions/tags';
 import * as CurArticleActions from '../../actions/currentArticle';
 import * as NoteActions from '../../actions/notes';
+import * as UserActions from '../../actions/users';
 import ArticleControl from '../../components/AtiticleControl/articleControl';
 import FontAwesome from 'react-fontawesome';
 
@@ -33,7 +34,7 @@ Backend.propTypes = {
 }
 
 const TargetActions = {};
-Object.assign(TargetActions, TagActions, CurArticleActions, NoteActions);
+Object.assign(TargetActions, TagActions, CurArticleActions, NoteActions, UserActions);
 
 
 function mapStateToProps(state) {
