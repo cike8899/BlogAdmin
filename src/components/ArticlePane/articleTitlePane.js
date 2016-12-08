@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { message } from 'antd';
 import style from '../../styles/article.less';
@@ -20,6 +21,7 @@ class ArticleTitlePane extends Component {
             currentIdx: null
         }
         this.handleItemClick = this.handleItemClick.bind(this);
+        this.handleItemWrapScroll = this.handleItemWrapScroll.bind(this);
     }
 
     handlePlusClick(e) {
@@ -63,18 +65,19 @@ class ArticleTitlePane extends Component {
         return isSelected;
     }
 
-    handleItemWrapScroll(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        let scrollHeight = e.target.scrollHeight;
-        let clientHeight = e.target.clientHeight;
-        let scrollTop = e.target.scrollTop;
+    handleItemWrapScroll() {//函数去抖
+        // e.preventDefault();
+        // e.stopPropagation();
+        let target = this.refs["title-wrap"];
+        let scrollHeight = target.scrollHeight;
+        let clientHeight = target.clientHeight;
+        let scrollTop = target.scrollTop;
         console.info(scrollHeight - scrollTop);
         let total = this.props.notes.count;
         let currentLength = this.props.notes.rows.length;
-        if (scrollHeight - scrollTop - 10 <= clientHeight) {//异步读取数据
-            if ((currentLength < total) && this.isFetchSucceed) {
-                this.isFetchSucceed = false;
+        if (scrollHeight - scrollTop - 20 <= clientHeight) {//异步读取数据
+            if ((currentLength < total)) {
+                // this.isFetchSucceed = false;
                 let currentPage = (currentLength / 20) + 1;
                 console.info("currentPage:", currentPage);
                 let promise = this.props.actions.getNotesByPage(currentPage);
@@ -84,6 +87,7 @@ class ArticleTitlePane extends Component {
                 //     console.info(err);
                 // });
             }
+            console.info(target);
         }
     }
 
@@ -124,6 +128,7 @@ class ArticleTitlePane extends Component {
 
     render() {
         let rows = this.props.notes.rows;
+        let that = this;
         return (
             <div className={`${style["main-con"]} ${style["article-list-wrap"]}`}>
                 <div className={style["edit-article-title"]}>
@@ -136,8 +141,10 @@ class ArticleTitlePane extends Component {
                             onClick={(e) => { this.handlePlusClick(e) } } />
                     </span>
                 </div>
-                <div className={style["edit-article-item-wrap"]}
-                    onScroll={(e) => { this.handleItemWrapScroll(e) } }>
+                <div className={style["edit-article-item-wrap"]} ref="title-wrap"
+                    onScroll={
+                        _.throttle(function () { that.handleItemWrapScroll(); }, 1000)
+                    }>
                     <div className={style["edit-article-item-inner"]}
                         onContextMenu={(e) => { this.handleContextMenu(e) } }>
                         {rows.map((x, idx) => {

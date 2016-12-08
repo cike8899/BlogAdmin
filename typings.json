@@ -4,6 +4,7 @@
     "babel-core": "registry:dt/babel-core#6.7.0+20160423062108",
     "classnames": "registry:dt/classnames#0.0.0+20160316155526",
     "html-webpack-plugin": "registry:dt/html-webpack-plugin#2.22.2+20160802151720",
+    "immutable": "registry:dt/immutable#3.8.1+20161028131303",
     "less": "registry:dt/less#0.0.0+20160608105036",
     "lodash": "registry:dt/lodash#4.14.0+20161004174455",
     "react": "registry:dt/react#0.14.0+20160927082313",

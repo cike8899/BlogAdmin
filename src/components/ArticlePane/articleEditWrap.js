@@ -4,6 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import Editor from 'react-simplemde-editor';
 import style from '../../styles/article.less';
 import { isContentContainExcerpt, truncateContent } from '../../utils/excerpt';
+import TagSelect from './tagSelect';
 
 class ArticleEditWrap extends Component {
     constructor(props, context) {
@@ -103,12 +104,7 @@ class ArticleEditWrap extends Component {
                     <div className={style["operate-article-pane"]}>
                         <div className={style["operate-article-div"]}>
                             <div className={style["symbol-pan"]}>
-                                <div className={style["add-tag"]}>
-                                    <FontAwesome name="plus" />
-                                </div>
-                                <div className={style["del-tag"]}>
-                                    <FontAwesome name="minus" />
-                                </div>
+                                <TagSelect />
                             </div>
                             <div className={style["btn-pan"]}>
                                 <button className={style["del-draft"]}>删除草稿</button>
