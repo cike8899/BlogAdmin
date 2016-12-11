@@ -5,25 +5,28 @@ const Option = Select.Option;
 
 class TagSelect extends Component {
 
-    children = [];
-
     constructor(props, context) {
         super(props, context);
-        this.initOptions();
     }
 
     initOptions() {
-        for (let i = 10; i < 36; i++) {
-            this.children.push(
-                <Option key={i.toString(36) + i}>
-                    {i.toString(36) + i}
+        let children = [];
+        let allTags = this.props.allTags;
+
+        allTags && allTags.forEach((tag, idx) => {
+            children.push(
+                <Option key={tag.name}>
+                    {tag.name}
                 </Option>
             );
-        }
+        });
+
+        return children;
     }
 
     handleChange(value) {
         console.log(`selected ${value}`);
+        this.props.changeTags(value);
     }
 
     handleSearch(value) {
@@ -42,19 +45,32 @@ class TagSelect extends Component {
         console.info("blur:", e);
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.info(nextProps);
+    }
+
+
     render() {
+        console.info(this.props.tags);
+        let allTags = this.props.allTags;
+        let tagNames = this.props.tags.map(x => {
+            return x.name;
+        });
+        // console.info("tagNames:", tagNames);
         return (
             <Select
-                tags
+                key={this.props.symbol}
+                multiple
                 style={{ width: 600 }}
-                onChange={this.handleChange}
-                onSearch={this.handleSearch}
-                onSelect={this.handleSelect}
-                onDeselect={this.handleDeselect}
-                onBlur={this.handleBlur}
+                onChange={e => this.handleChange(e)}
+                // onSearch={this.handleSearch}
+                // onSelect={this.handleSelect}
+                // onDeselect={this.handleDeselect}
+                // onBlur={this.handleBlur}
                 tokenSeparators={[',']}
+                defaultValue={tagNames}
                 >
-                {this.children}
+                {this.initOptions()}
             </Select>
         );
     }

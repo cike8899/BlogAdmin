@@ -5,5 +5,6 @@ import tags from './tags';
 import users from './users';
 import currentArticle from './currentArticle';
 import notes from './notes';
+import allTags from './allTags';
 
-export default combineReducers({ routing, todos, tags, users, currentArticle ,notes})//全局变量的名称在这里，state.users
+export default combineReducers({ routing, todos, tags, users, currentArticle ,notes,allTags})//全局变量的名称在这里，state.users

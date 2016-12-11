@@ -7,16 +7,17 @@ import * as NoteActions from '../../actions/notes';
 
 class ArticleEditContainer extends Component {
     render() {
-        const {note, notesActions} = this.props;
+        const {note, notesActions, allTags} = this.props;
         return (
-            <ArticleEditWrap note={note} notesActions={notesActions} />
+            <ArticleEditWrap note={note} notesActions={notesActions} allTags={allTags} />
         );
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        note: state.notes.selectedNote
+        note: state.notes.selectedNote,
+        allTags: state.allTags
     }
 }
 

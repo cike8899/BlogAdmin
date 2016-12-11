@@ -18,6 +18,10 @@ export function getAllTags() {
     return getAll(url + "/getalltag");
 }
 
+export function getAllPureTags() {
+    return getAll(url + "/getallpuretags");
+}
+
 export function getTagsByPage(data) {
     if (!data) {
         data = { countPerPage: 5, currentPage: 1 };

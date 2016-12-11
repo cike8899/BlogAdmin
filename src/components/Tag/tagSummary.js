@@ -186,10 +186,12 @@ class TagSummary extends Component {
             preTotal: this.props.tags[0].count
         };
         this.isAddAction = true;
-        let val = this
-            .props
-            .actions
-            .addTag(obj);
+        let promise = this.props.actions.addTag(obj);
+        promise.then((data) => {
+            this.props.actions.getAllPureTags();
+        }, (err) => {
+            console.info(err);
+        });
     }
 
     handleAllTags() {
@@ -213,31 +215,32 @@ class TagSummary extends Component {
             this.modifyPaginationAfterAddTag(nextProps);
         }
 
-        console.info("componentWillReceiveProps:", this.props.tags[0]);
+        // console.info("componentWillReceiveProps:", this.props.tags[0]);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.info("shouldComponentUpdate:", this.props.tags[0]);
+        // console.info("shouldComponentUpdate:", this.props.tags[0]);
         return nextProps.tags !== this.props.tags[0];
     }
 
     componentWillUpdate(nextProps, nextState) {
-        console.info("componentWillUpdate:", this.props.tags[0]);
+        // console.info("componentWillUpdate:", this.props.tags[0]);
         // this.pagination = this.buildPagination();//在此this.props.tags[0].count拿不到新的props，只有在render的时候才能拿到新的props
         return false;
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.info("componentDidUpdate:", this.props.tags[0]);
+        // console.info("componentDidUpdate:", this.props.tags[0]);
     }
 
 
     componentWillMount() {
-        console.info("componentWillMount");
+        // console.info("componentWillMount");
     }
 
     componentDidMount() {
-        console.info("componentDidMount");
+        // console.info("componentDidMount");
+        this.props.actions.getAllPureTags();
     }
 
 
@@ -265,7 +268,6 @@ class TagSummary extends Component {
                         className={style["add-tag-btn"]}
                         onClick={this.handleBtnClick}>添加标签
                     </Button>
-                    <Button onClick={this.handleAllTags}>获取所有</Button>
                 </div>
             </div>
         );

@@ -21,6 +21,7 @@ class ArticleEditWrap extends Component {
                 updatedAt: ""
             }
         }
+        this.changeTags = this.changeTags.bind(this);
     }
 
 
@@ -76,6 +77,18 @@ class ArticleEditWrap extends Component {
         }
     }
 
+    changeTags(tags) {
+        let tagArr = [];
+        let allTags = this.props.allTags.rows;
+        allTags.forEach(x => {
+            if (tags.some(y => y === x.name)) {
+                tagArr.push(x);
+            }
+        });
+        this.state.note.tags = tagArr;
+        this.setState({ note: this.state.note });
+    }
+
     componentWillMount() {
         // this.props.actions.getNotesByPage(1);
     }
@@ -104,11 +117,14 @@ class ArticleEditWrap extends Component {
                     <div className={style["operate-article-pane"]}>
                         <div className={style["operate-article-div"]}>
                             <div className={style["symbol-pan"]}>
-                                <TagSelect />
+                                <TagSelect tags={this.props.note.tags} allTags={this.props.allTags.rows}
+                                    changeTags={this.changeTags} symbol={this.props.note.id}
+                                    />
                             </div>
                             <div className={style["btn-pan"]}>
                                 <button className={style["del-draft"]}>删除草稿</button>
-                                <button className={style["save-draft"]} onClick={(e) => { this.saveArticle(e) } }>保存文章</button>
+                                <button className={style["save-draft"]}
+                                    onClick={(e) => { this.saveArticle(e) } }>保存文章</button>
                                 <button onClick={(e) => { this.publishArticle(e) } }>发布文章</button>
                             </div>
                         </div>

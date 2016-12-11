@@ -74,5 +74,5 @@ export default handleActions({
         });
         // return action.payload; //action.payload  是后台返回的数据
         return [{ rows: rows, count: action.payload.count, operationType: "del" }];
-    },
+    }
 }, initialState)
